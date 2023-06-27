@@ -7,7 +7,7 @@ class Sudoku(var data: List[Int]) {
 
   def isValid(): Boolean = ??? // contains error
 
-  def readLine(line: Int): List[Int] = ???
+  def readLine(line: Int): List[Int] = this.data.slice((line* 9), (line * 9) + 9)
 
   def readColumn(column: Int): List[Int] = {
     return data.zipWithIndex
