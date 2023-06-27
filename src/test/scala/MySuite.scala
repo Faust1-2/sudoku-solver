@@ -7,35 +7,32 @@ class MySuite extends munit.FunSuite {
     assertEquals(obtained, expected)
   }
 
-  test("isValid") {
+  test("isValid") {}
 
-  }
+  test("isSolved") {}
 
-  test("isSolved") {
-
-  }
-
-  test("readLine") {
-
-  }
+  test("readLine") {}
 
   test("readColumn") {
     val wantedColumn = 3
-    var myList: List[Integer] = List()
-    var testList: List[Integer] = List()
+    var myList: List[Int] = List()
+    var testList: List[Int] = List()
     for (x <- 0 to 80) {
       myList = myList :+ x
-      if (x%9 == wantedColumn) {
+      if (x % 9 == wantedColumn) {
         testList = testList :+ x
       }
     }
     val mySudoKu = Sudoku(myList)
-    
+
     assertEquals(mySudoKu.readColumn(wantedColumn), testList)
   }
 
   test("readSquare") {
+    val sudoku = Sudoku(List.range(0, 81))
+    val result = List(30, 31, 32, 39, 40, 41, 48, 49, 50)
 
+    assertEquals(sudoku.readSquare(5), result)
   }
 
 }
