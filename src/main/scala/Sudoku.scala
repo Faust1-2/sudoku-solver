@@ -26,6 +26,12 @@ class Sudoku(var data: List[Int]) {
     case 8 => this.data.slice(57, 60) ++ this.data.slice(66, 69) ++ this.data.slice(75, 78)
     case 9 => this.data.slice(60, 63) ++ this.data.slice(69, 72) ++ this.data.slice(78, 81)
 
+  def findSquare(x: Int, y: Int): Int = {
+    val square_x = (x / 3).toInt
+    val square_y = (y / 3).toInt
+    return square_x + square_y*3
+  }
+
   override def toString(): String = {
     val myString = mutable.StringBuilder()
     for (y <- 0 to 10) {
