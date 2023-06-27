@@ -36,7 +36,7 @@ class MySuite extends munit.FunSuite {
   }
 
   test("PrettyPrint") {
-    var myList: List[Integer] = List()
+    var myList: List[Int] = List()
     for (x <- 0 to 80) {
       myList = myList :+ x%9
     }
