@@ -2,8 +2,8 @@ package sudoku
 
 import scala.collection.mutable
 
-class Sudoku(var data: List[Integer]) {
-    def isSolved(): Boolean = ???
+class Sudoku(var data: List[Int]) {
+  def isSolved(): Boolean = ???
 
   def isValid(): Boolean = ??? // contains error
 
@@ -32,16 +32,15 @@ class Sudoku(var data: List[Integer]) {
 
   override def toString(): String = {
     val myString = mutable.StringBuilder()
-      for (y <- 0 to 10) {
-        for (x <- 0 to 8) {
-          if (y == 0) myString.addAll(" ___")
-          else if (y == 10) myString.addAll(" ‾‾‾")
-          else myString.addAll("| %d ".format(data(x + ((y-1)*9))))
-        }
-        if (y != 0 && y != 10) myString.addAll("|\n")
-        else myString.addAll("\n")
+    for (y <- 0 to 10) {
+      for (x <- 0 to 8) {
+        if (y == 0) myString.addAll(" ___")
+        else if (y == 10) myString.addAll(" ‾‾‾")
+        else myString.addAll("| %d ".format(data(x + ((y - 1) * 9))))
       }
-    return myString.toString()
+      if (y != 0 && y != 10) myString.addAll("|\n")
+      else myString.addAll("\n")
     }
+    return myString.toString()
   }
 }
