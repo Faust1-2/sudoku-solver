@@ -44,17 +44,11 @@ class MySuite extends munit.FunSuite {
   }
 
   test("findSquare") {
-    var myList: List[Int] = List()
-    for (x <- 0 to 80) {
-      myList = myList :+ x%9
-    }
-    val mySudoKu = Sudoku(myList)
-
-    assertEquals(mySudoKu.findSquare(0, 0), 0)
-    assertEquals(mySudoKu.findSquare(4, 2), 1)
-    assertEquals(mySudoKu.findSquare(2, 4), 3)
-    assertEquals(mySudoKu.findSquare(7, 5), 5)
-    assertEquals(mySudoKu.findSquare(5, 8), 7)
+    assertEquals(sudoKu.findSquare(0, 0), 0)
+    assertEquals(sudoKu.findSquare(4, 2), 1)
+    assertEquals(sudoKu.findSquare(2, 4), 3)
+    assertEquals(sudoKu.findSquare(7, 5), 5)
+    assertEquals(sudoKu.findSquare(5, 8), 7)
   }
 
 }
