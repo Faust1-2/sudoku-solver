@@ -7,14 +7,10 @@ class Sudoku(var data: List[Int]) {
 
   def readLine(line: Int): List[Int] = ???
 
-  def readColumn(column: Int): List[Int] = {
-    var columnList: List[Int] = List()
-    for {
-      x <- 0 to 80
-      if (x % 9 == column)
-      y = data(x)
-    } yield columnList = columnList :+ y
-    return columnList
+  def readColumn(column: Integer): List[Integer] = {
+    return data.zipWithIndex
+      .filter((elem, index) => index % 9 == column)
+      .map((elem, index) => elem)
   }
 
   def readSquare(square: Int): List[Int] = square.match
