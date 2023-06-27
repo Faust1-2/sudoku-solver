@@ -5,7 +5,44 @@ import scala.collection.mutable
 class Sudoku(var data: List[Int]) {
   def isSolved(): Boolean = ???
 
-  def isValid(): Boolean = ??? // contains error
+  def isValid(): Boolean = {
+    def hasDuplicates(list: List[Int]): Boolean = {
+      val filteredList = list.filter(_ != 0)
+      filteredList.distinct.size != filteredList.size
+    }
+
+    def checkRows(): Boolean = {
+      (0 until 9).foreach { row =>
+        if (hasDuplicates(readLine(row))) {
+          println(s"Duplicate value in row $row")
+          return false
+        }
+      }
+      true
+    }
+
+    def checkColumns(): Boolean = {
+      (0 until 9).foreach { column =>
+        if (hasDuplicates(readColumn(column))) {
+          println(s"Duplicate value in column $column")
+          return false
+        }
+      }
+      true
+    }
+
+    def checkSquares(): Boolean = {
+      (0 until 9).foreach { square =>
+        if (hasDuplicates(readSquare(square))) {
+          println(s"Duplicate value in square $square")
+          return false
+        }
+      }
+      true
+    }
+
+    checkRows() && checkColumns() && checkSquares()
+  }
 
   def readLine(line: Int): List[Int] = this.data.slice((line* 9), (line * 9) + 9)
 
