@@ -12,8 +12,8 @@ object Main extends ZIOAppDefault {
     }
 
     val mySudoku = Sudoku(myList)
-    mySudoku.prettyPrint()
     for {
+      _ <- Console.print(mySudoku)
       _ <- Console.print("Enter the path to the JSON file containing the Sudoku problem:")
       path <- Console.readLine
       _ <-  Console.printLine(s"You entered: $path")
