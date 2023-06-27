@@ -1,5 +1,7 @@
 package sudoku
 
+import scala.collection.mutable
+
 class Sudoku(var data: List[Int]) {
   def isSolved(): Boolean = ???
 
@@ -24,15 +26,17 @@ class Sudoku(var data: List[Int]) {
     case 8 => this.data.slice(57, 60) ++ this.data.slice(66, 69) ++ this.data.slice(75, 78)
     case 9 => this.data.slice(60, 63) ++ this.data.slice(69, 72) ++ this.data.slice(78, 81)
 
-  def prettyPrint() = {
+  override def toString(): String = {
+    val myString = mutable.StringBuilder()
     for (y <- 0 to 10) {
       for (x <- 0 to 8) {
-        if (y == 0) Console.print(" ___")
-        else if (y == 10) Console.print(" ‾‾‾")
-        else Console.print("| %d ".format(data(x + ((y - 1) * 9))))
+        if (y == 0) myString.addAll(" ___")
+        else if (y == 10) myString.addAll(" ‾‾‾")
+        else myString.addAll("| %d ".format(data(x + ((y - 1) * 9))))
       }
-      if (y != 0 && y != 10) Console.print("|\n")
-      else Console.print("\n")
+      if (y != 0 && y != 10) myString.addAll("|\n")
+      else myString.addAll("\n")
     }
+    return myString.toString()
   }
 }

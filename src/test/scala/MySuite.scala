@@ -35,4 +35,26 @@ class MySuite extends munit.FunSuite {
     assertEquals(sudoku.readSquare(5), result)
   }
 
+  test("PrettyPrint") {
+    var myList: List[Integer] = List()
+    for (x <- 0 to 80) {
+      myList = myList :+ x%9
+    }
+    val mySudoKu = Sudoku(myList)
+    assertNoDiff(
+      mySudoKu.toString(),
+      """ ___ ___ ___ ___ ___ ___ ___ ___ ___
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾"""
+    )
+  }
+
 }
