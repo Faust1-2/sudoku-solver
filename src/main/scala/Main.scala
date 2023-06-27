@@ -6,7 +6,7 @@ object Main extends ZIOAppDefault {
 
   def run: ZIO[Any, Throwable, Unit] =
 
-    var myList: List[Integer] = List()
+    var myList: List[Int] = List()
     for (x <- 0 to 80) {
       myList = myList :+ x%9
     }

@@ -1,14 +1,14 @@
 package sudoku
 
-class Sudoku(var data: List[Integer]) {
+class Sudoku(var data: List[Int]) {
     def isSolved(): Boolean = ???
 
     def isValid(): Boolean = ??? // contains error
 
-    def readLine(line: Integer): List[Integer] = ???
+    def readLine(line: Int): List[Int] = ???
 
-    def readColumn(column: Integer): List[Integer] = {
-        var columnList: List[Integer] = List()
+    def readColumn(column: Int): List[Int] = {
+        var columnList: List[Int] = List()
         for {
             x <- 0 to 80
             if (x % 9 == column)
@@ -17,7 +17,7 @@ class Sudoku(var data: List[Integer]) {
         return columnList
     }
 
-    def readSquare(square: Integer): List[Integer] = ???
+    def readSquare(square: Int): List[Int] = ???
 
     def prettyPrint() = {
         for (y <- 0 to 10) {

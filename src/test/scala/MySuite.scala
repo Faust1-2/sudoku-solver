@@ -21,8 +21,8 @@ class MySuite extends munit.FunSuite {
 
   test("readColumn") {
     val wantedColumn = 3
-    var myList: List[Integer] = List()
-    var testList: List[Integer] = List()
+    var myList: List[Int] = List()
+    var testList: List[Int] = List()
     for (x <- 0 to 80) {
       myList = myList :+ x
       if (x%9 == wantedColumn) {
