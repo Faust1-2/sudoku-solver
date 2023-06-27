@@ -7,7 +7,7 @@ class Sudoku(var data: List[Int]) {
 
   def readLine(line: Int): List[Int] = ???
 
-  def readColumn(column: Integer): List[Integer] = {
+  def readColumn(column: Int): List[Int] = {
     return data.zipWithIndex
       .filter((elem, index) => index % 9 == column)
       .map((elem, index) => elem)
