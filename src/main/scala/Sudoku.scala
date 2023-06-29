@@ -28,19 +28,19 @@ class Sudoku(grid: Array[Array[Int]]) {
     val square_y = y / 3
     return square_x + square_y*3
   }
+
+  def readSquare(square: Int): Array[Int] = {
+    val positionY = square/3
+    val positionX = (square%3) * 3
+    return grid(positionY).slice(positionX, positionX+3) 
+    ++ grid(positionY+1).slice(positionX, positionX+3) 
+    ++ grid(positionY).slice(positionX, positionX+3)
+  }
   
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !grid(y).contains(value)
     val isNotInColumn = !readColumn(x).contains(value)
-    val boxLine = x / 3
-    val boxColumn = y / 3
-
-    val box = for {
-      yB <- (boxColumn * 3) until (boxColumn * 3 + 3)
-      xB <- (boxLine * 3) until (boxLine * 3 + 3)
-    } yield grid(yB)(xB)
-
-    val isNotInBox = !box.contains(value)
+    val isNotInBox = !readSquare(findSquare(x, y)).contains(value)
 
     return isNotInBox && isNotInColumn && isNotInLine
   }
