@@ -1,7 +1,6 @@
 package sudoku
 
 import zio._
-import sudoku.Sudoku
 
 object Main extends ZIOAppDefault {
 
