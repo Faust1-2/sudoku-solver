@@ -22,6 +22,12 @@ class Sudoku(grid: Array[Array[Int]]) {
   def readColumn(column: Int): Array[Int] = {
     return grid.map((line) => line(column))
   }
+
+  def findSquare(x: Int, y: Int): Int = {
+    val square_x = (x / 3).toInt
+    val square_y = (y / 3).toInt
+    return square_x + square_y*3
+  }
   
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !grid(y).contains(value)
