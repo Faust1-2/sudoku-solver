@@ -11,14 +11,14 @@ class Sudoku(grid: Array[Array[Int]]) {
       for (value <- 0 to 8) {
         if (line == 0) myString.addAll(" ___")
         else if (line == 10) myString.addAll(" ‾‾‾")
-        else myString.addAll("| %d ".format(grid(line-1)(value)))
+        else myString.addAll("| %d ".format(grid(line - 1)(value)))
       }
       if (line != 0 && line != 10) myString.addAll("|\n")
       else myString.addAll("\n")
     }
     return myString.toString()
   }
-  
+
   def isValid(): Boolean = {
     def hasDuplicates(list: Array[Int]): Boolean = {
       val filteredList = list.filter(_ != 0)
@@ -26,62 +26,63 @@ class Sudoku(grid: Array[Array[Int]]) {
     }
 
     def checkRows(): Boolean = {
-      (0 until 9).foreach { row =>
-        if (hasDuplicates(readLine(row))) {
-          println(s"Duplicate value in row $row")
-          return false
+      boundary:
+        (0 until 9).foreach { row =>
+          if (hasDuplicates(readLine(row))) {
+            println(s"Duplicate value in row $row")
+            boundary.break(false)
+          }
         }
-      }
-      true
+        true
     }
 
     def checkColumns(): Boolean = {
-      (0 until 9).foreach { column =>
-        if (hasDuplicates(readColumn(column))) {
-          println(s"Duplicate value in column $column")
-          return false
+      boundary:
+        (0 until 9).foreach { column =>
+          if (hasDuplicates(readColumn(column))) {
+            println(s"Duplicate value in column $column")
+            boundary.break(false)
+          }
         }
-      }
-      true
+        true
     }
 
     def checkSquares(): Boolean = {
-      (0 until 9).foreach { square =>
-        if (hasDuplicates(readSquare(square))) {
-          println(s"Duplicate value in square $square")
-          return false
+      boundary:
+        List((0, 0), (0, 3), (0, 6), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)).foreach { (x, y) =>
+          if (hasDuplicates(readSquare(x, y))) {
+            println(s"Duplicate value in square $x , $y")
+            boundary.break(false)
+          }
         }
-      }
-      true
+        true
     }
 
     checkRows() && checkColumns() && checkSquares()
   }
-  
+
   def readColumn(column: Int): Array[Int] = {
     return grid.map((line) => line(column))
   }
 
   def readLine(line: Int): Array[Int] = grid(line)
 
-  def findSquare(x: Int, y: Int): Int = {
-    val square_x = x / 3
-    val square_y = y / 3
-    return square_x + square_y*3
+  def readSquare(x: Int, y: Int): Array[Int] = {
+    val boxLine = x / 3
+    val boxColumn = y / 3
+
+    val box = for {
+      yB <- (boxColumn * 3) until (boxColumn * 3 + 3)
+      xB <- (boxLine * 3) until (boxLine * 3 + 3)
+    } yield grid(yB)(xB)
+
+    return box.toArray
   }
 
-  def readSquare(square: Int): Array[Int] = {
-    val positionY = square/3
-    val positionX = (square%3) * 3
-    return grid(positionY).slice(positionX, positionX+3) 
-    ++ grid(positionY+1).slice(positionX, positionX+3) 
-    ++ grid(positionY).slice(positionX, positionX+3)
-  }
-  
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !readLine(y).contains(value)
     val isNotInColumn = !readColumn(x).contains(value)
-    val isNotInBox = !readSquare(findSquare(x, y)).contains(value)
+    val isNotInBox = !readSquare(x, y).contains(value)
 
     return isNotInBox && isNotInColumn && isNotInLine
   }
