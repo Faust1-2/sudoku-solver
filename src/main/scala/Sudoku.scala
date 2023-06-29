@@ -2,8 +2,34 @@ package sudoku
 
 import scala.collection.mutable
 import scala.util.boundary
+import zio._
+import zio.console._
+import zio.nio.file._
+import zio.json._
+import zio.json.DecoderOps._
+
 
 class Sudoku(grid: Array[Array[Int]]) {
+
+  object Sudoku {
+    implicit val decoder: JsonDecoder[Sudoku] = DeriveJsonDecoder.gen[Sudoku]
+  }
+
+  def parseJson(jsonStr: String): IO[String, Sudoku] = {
+    ZIO.fromEither(jsonStr.fromJson[Sudoku]).mapError(_.getMessage)
+  }
+
+  def readFile(path: Path): ZIO[Blocking, String, String] = {
+    ZIO.accessM[Blocking](_.get.blocking {
+      FileChannel.open(path, StandardOpenOption.READ).map { channel =>
+        val buffer = ByteBuffer.allocate(channel.size().toInt)
+        channel.read(buffer)
+        buffer.flip()
+        new String(buffer.array(), "UTF-8")
+      }.catchAllCause(cause => IO.fail(cause.prettyPrint))
+    })
+  }
+
 
   override def toString(): String = {
     val myString = mutable.StringBuilder()
