@@ -20,7 +20,7 @@ class Sudoku(grid: Array[Array[Int]]) {
   }
   
   def isValid(): Boolean = {
-    def hasDuplicates(list: List[Int]): Boolean = {
+    def hasDuplicates(list: Array[Int]): Boolean = {
       val filteredList = list.filter(_ != 0)
       filteredList.distinct.size != filteredList.size
     }
