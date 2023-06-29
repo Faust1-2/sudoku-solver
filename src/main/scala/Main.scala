@@ -30,7 +30,7 @@ object Main extends ZIOAppDefault {
       Array(5, 6, 7, 4, 2, 9, 0, 1, 3)
     )
 
-    val mySudoku = Sudoku(myArray)
+    val mySudoku = Sudoku(myList)
     for {
       _ <- Console.print(mySudoku)
       // _ <- Console.print(mySudoku.readSquare(9).foreach(print))
