@@ -33,7 +33,7 @@ class MySuite extends munit.FunSuite {
 
   test("readSquare") {
     val result = Array(3, 4, 5, 3, 4, 5, 3, 4, 5)
-    assertEquals(sudokuTable.readSquare(5), result)
+    assertEquals(sudokuTable.readSquare(5).toSeq, result.toSeq)
   }
 
   test("toString") {
