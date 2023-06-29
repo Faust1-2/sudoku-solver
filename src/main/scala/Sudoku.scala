@@ -23,6 +23,8 @@ class Sudoku(grid: Array[Array[Int]]) {
     return grid.map((line) => line(column))
   }
 
+  def readLine(line: Int): Array[Int] = grid(line)
+
   def findSquare(x: Int, y: Int): Int = {
     val square_x = x / 3
     val square_y = y / 3
@@ -38,7 +40,7 @@ class Sudoku(grid: Array[Array[Int]]) {
   }
   
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
-    val isNotInLine = !grid(y).contains(value)
+    val isNotInLine = !readLine(y).contains(value)
     val isNotInColumn = !readColumn(x).contains(value)
     val isNotInBox = !readSquare(findSquare(x, y)).contains(value)
 
