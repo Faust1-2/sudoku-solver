@@ -19,9 +19,13 @@ class Sudoku(grid: Array[Array[Int]]) {
     return myString.toString()
   }
   
+  def readColumn(column: Int): Array[Int] = {
+    return grid.map((line) => line(column))
+  }
+  
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !grid(y).contains(value)
-    val isNotInColumn = !grid.map(value => value.apply(x)).contains(value)
+    val isNotInColumn = !readColumn(x).contains(value)
     val boxLine = x / 3
     val boxColumn = y / 3
 
