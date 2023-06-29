@@ -94,4 +94,8 @@
 package sudoku
 
 class Sudoku(grid: Array[Array[Int]]) {
+
+  def readColumn(column: Int): Array[Int] = {
+    return grid.map((line) => line(column))
+  }
 }
