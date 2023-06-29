@@ -24,8 +24,8 @@ class Sudoku(grid: Array[Array[Int]]) {
   }
 
   def findSquare(x: Int, y: Int): Int = {
-    val square_x = (x / 3).toInt
-    val square_y = (y / 3).toInt
+    val square_x = x / 3
+    val square_y = y / 3
     return square_x + square_y*3
   }
   
