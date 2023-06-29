@@ -19,6 +19,45 @@ class Sudoku(grid: Array[Array[Int]]) {
     return myString.toString()
   }
   
+  def isValid(): Boolean = {
+    def hasDuplicates(list: Array[Int]): Boolean = {
+      val filteredList = list.filter(_ != 0)
+      filteredList.distinct.size != filteredList.size
+    }
+
+    def checkRows(): Boolean = {
+      (0 until 9).foreach { row =>
+        if (hasDuplicates(readLine(row))) {
+          println(s"Duplicate value in row $row")
+          return false
+        }
+      }
+      true
+    }
+
+    def checkColumns(): Boolean = {
+      (0 until 9).foreach { column =>
+        if (hasDuplicates(readColumn(column))) {
+          println(s"Duplicate value in column $column")
+          return false
+        }
+      }
+      true
+    }
+
+    def checkSquares(): Boolean = {
+      (0 until 9).foreach { square =>
+        if (hasDuplicates(readSquare(square))) {
+          println(s"Duplicate value in square $square")
+          return false
+        }
+      }
+      true
+    }
+
+    checkRows() && checkColumns() && checkSquares()
+  }
+  
   def readColumn(column: Int): Array[Int] = {
     return grid.map((line) => line(column))
   }
