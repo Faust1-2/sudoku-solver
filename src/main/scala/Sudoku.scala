@@ -5,6 +5,20 @@ import scala.util.boundary
 
 class Sudoku(grid: Array[Array[Int]]) {
 
+  override def toString(): String = {
+    val myString = mutable.StringBuilder()
+    for (line <- 0 to 10) {
+      for (value <- 0 to 8) {
+        if (line == 0) myString.addAll(" ___")
+        else if (line == 10) myString.addAll(" ‾‾‾")
+        else myString.addAll("| %d ".format(grid(line-1)(value)))
+      }
+      if (line != 0 && line != 10) myString.addAll("|\n")
+      else myString.addAll("\n")
+    }
+    return myString.toString()
+  }
+  
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !grid(y).contains(value)
     val isNotInColumn = !grid.map(value => value.apply(x)).contains(value)
