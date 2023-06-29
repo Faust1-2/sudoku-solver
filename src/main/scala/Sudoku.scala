@@ -94,4 +94,12 @@
 package sudoku
 
 class Sudoku(grid: Array[Array[Int]]) {
+
+  def readSquare(square: Int): Array[Int] = {
+    val positionY = square/3
+    val positionX = (square%3) * 3
+    return grid(positionY).slice(positionX, positionX+3) 
+    ++ grid(positionY+1).slice(positionX, positionX+3) 
+    ++ grid(positionY).slice(positionX, positionX+3)
+  }
 }
