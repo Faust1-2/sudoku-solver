@@ -2,7 +2,17 @@ import sudoku.Sudoku
 
 class MySuite extends munit.FunSuite {
 
-  val sudoKu = Sudoku(List.range(0, 81).map(x => x%9))
+  var sudokuMatrix = Array[Array[Int]]()
+
+  for(x <- 0 to 8) {
+    var sudokuLine = Array[Int]()
+    for(y <- 0 to 8) {
+      sudokuLine = sudokuLine :+ y
+    }
+    sudokuMatrix = sudokuMatrix :+ sudokuLine
+  }
+
+  val sudokuTable = Sudoku(sudokuMatrix)
 
   test("isValid") {}
 
@@ -12,23 +22,23 @@ class MySuite extends munit.FunSuite {
 
   test("readColumn") {
     val wantedColumn = 3
-    var testList: List[Int] = List()
+    var testList = Array[Int]()
     for (x <- 0 to 80) {
       if (x % 9 == wantedColumn) {
         testList = testList :+ x%9
       }
     }
-    assertEquals(sudoKu.readColumn(wantedColumn), testList)
+    assertEquals(sudokuTable.readColumn(wantedColumn), testList)
   }
 
   test("readSquare") {
-    val result = List(3, 4, 5, 3, 4, 5, 3, 4, 5)
-    assertEquals(sudoKu.readSquare(5), result)
+    val result = Array(3, 4, 5, 3, 4, 5, 3, 4, 5)
+    assertEquals(sudokuTable.readSquare(5), result)
   }
 
   test("toString") {
     assertNoDiff(
-      sudoKu.toString(),
+      sudokuTable.toString(),
       """ ___ ___ ___ ___ ___ ___ ___ ___ ___
 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
@@ -44,11 +54,10 @@ class MySuite extends munit.FunSuite {
   }
 
   test("findSquare") {
-    assertEquals(sudoKu.findSquare(0, 0), 0)
-    assertEquals(sudoKu.findSquare(4, 2), 1)
-    assertEquals(sudoKu.findSquare(2, 4), 3)
-    assertEquals(sudoKu.findSquare(7, 5), 5)
-    assertEquals(sudoKu.findSquare(5, 8), 7)
+    assertEquals(sudokuTable.findSquare(0, 0), 0)
+    assertEquals(sudokuTable.findSquare(4, 2), 1)
+    assertEquals(sudokuTable.findSquare(2, 4), 3)
+    assertEquals(sudokuTable.findSquare(7, 5), 5)
+    assertEquals(sudokuTable.findSquare(5, 8), 7)
   }
-
 }
