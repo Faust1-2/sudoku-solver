@@ -107,15 +107,15 @@ class MySuite extends munit.FunSuite {
   * 6 | 7 | 8
   */
   test("readSquare") {
-    assertEquals(sudokuTable.readSquare(0).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
-    assertEquals(sudokuTable.readSquare(1).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
-    assertEquals(sudokuTable.readSquare(2).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
-    assertEquals(sudokuTable.readSquare(3).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
-    assertEquals(sudokuTable.readSquare(4).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
-    assertEquals(sudokuTable.readSquare(5).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
-    assertEquals(sudokuTable.readSquare(6).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
-    assertEquals(sudokuTable.readSquare(7).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
-    assertEquals(sudokuTable.readSquare(8).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
+    assertEquals(sudokuTable.readSquare(0, 0).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
+    assertEquals(sudokuTable.readSquare(3, 0).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
+    assertEquals(sudokuTable.readSquare(6, 0).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
+    assertEquals(sudokuTable.readSquare(0, 3).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
+    assertEquals(sudokuTable.readSquare(3, 3).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
+    assertEquals(sudokuTable.readSquare(6, 3).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
+    assertEquals(sudokuTable.readSquare(0, 6).toSeq, Seq(0, 1, 2, 0, 1, 2, 0, 1, 2))
+    assertEquals(sudokuTable.readSquare(3, 6).toSeq, Seq(3, 4, 5, 3, 4, 5, 3, 4, 5))
+    assertEquals(sudokuTable.readSquare(6, 6).toSeq, Seq(6, 7, 8, 6, 7, 8, 6, 7, 8))
   }
 
   test("toString") {
