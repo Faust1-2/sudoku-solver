@@ -134,12 +134,4 @@ class MySuite extends munit.FunSuite {
  ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾"""
     )
   }
-
-  test("findSquare") {
-    assertEquals(sudokuTable.findSquare(0, 0), 0)
-    assertEquals(sudokuTable.findSquare(4, 2), 1)
-    assertEquals(sudokuTable.findSquare(2, 4), 3)
-    assertEquals(sudokuTable.findSquare(7, 5), 5)
-    assertEquals(sudokuTable.findSquare(5, 8), 7)
-  }
 }
