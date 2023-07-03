@@ -63,19 +63,18 @@ In order to run the project, you will need to run specific commands in the follo
 The sudoku grids are stored in JSON files, that are read by the application on run time. Those files need to follow the defined format that you can find here :
 
 ```json
-{
-    "grid": [
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-        [v, v, v, v, v, v, v, v, v],
-    ]
-}
+[
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+  [v, v, v, v, v, v, v, v, v],
+]
+
 ```
 
 With each **`v`** representing a value that you can set in the range **0 to 9**. With **0 representing the absence of value** and the values from **1 to 9 being real values of our sudoku grid**.
