@@ -5,6 +5,8 @@ import scala.util.boundary
 
 class Sudoku(grid: Grid) {
 
+  def getGrid(): Grid = grid
+
   override def toString(): String = {
     val myString = mutable.StringBuilder()
     for (line <- 0 to 10) {
@@ -123,20 +125,22 @@ class Sudoku(grid: Grid) {
     * @return true if the a value can be added to the case, false if not. 
     */
   def solve(x: Int = 0, y: Int = 0): Boolean = {
-    if (y == 9) {
-      print(this)
-      return true
-    } else if (x == 9) return solve(0, y + 1)
-    else if (grid(y)(x) != 0) return solve(x + 1, y)
-    else
-      boundary:
-        for (value <- 1 to 9) {
-          if (isInputValid(x, y, value)) {
-            grid(y)(x) = value
-            if (solve(x + 1, y)) boundary.break(true)
-            grid(y)(x) = 0
+    boundary:
+      if (y == 9) {
+        return true
+      } else if (x == 9) {
+        return solve(0, y + 1)
+      } else if (grid(y)(x) != 0) { 
+        return solve(x + 1, y)
+      } else {
+          for (value <- 1 to 9) {
+            if (isInputValid(x, y, value)) {
+              grid(y)(x) = value
+              if (solve(x + 1, y)) boundary.break(true)
+              else grid(y)(x) = 0
+            }
           }
-        }
-    return false
+          boundary.break(false)
+    }
   }
 }

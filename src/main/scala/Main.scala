@@ -30,5 +30,6 @@ object Main extends ZIOAppDefault {
       sudoku <- ZIO.from(Sudoku(grid = grid))
       _ <- Console.printLine(s"Successfully parsed Sudoku grid:\n$sudoku")
       _ <- ZIO.from(sudoku.solve())
+      _ <- Console.printLine(sudoku)
     } yield ()
 }
