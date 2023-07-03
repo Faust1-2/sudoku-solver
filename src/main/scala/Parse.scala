@@ -21,6 +21,13 @@ def parseFile(path: String): ZIO[Any, Throwable, Grid] = {
     case Left(value) => throw FileNotFoundException()
 }
 
+/**
+  * Checks the format of the given grid, according to set rules.
+  * It checks if it is a 9x9 grid, and if each value is equal to values from 0 to 9 (included).
+  *
+  * @param grid The grid to check
+  * @return true if everything is valid, false if not
+  */
 def validateFormat(grid: Grid): Boolean = {
   val acceptedValues = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
   boundary:
