@@ -2,9 +2,9 @@
 
 ## Topic
 
-Write a Sudoku solver in Scala 3 using [ZIO](https://zio.dev/overview/getting-started), a purely functional, type-safe, composable library for asynchronous, concurrent programming in Scala. You will find useful to use additional libraries from the ZIP ecosystem, such as [`zio-nio`](https://zio.dev/zio-nio/) and [`zio-json`](https://zio.dev/zio-json/).
+This application is a Sudoku solver in Scala 3 using [ZIO](https://zio.dev/overview/getting-started), a purely functional, type-safe, composable library for asynchronous, concurrent programming in Scala. 
 
-## Description
+## Description of the game
 
 Sudoku is a popular logic-based puzzle game played on a 9x9 grid. The grid is divided into 9 rows, 9 columns, and 9 3x3 sub-grids. The objective is to fill the grid with digits from 1 to 9 such that each row, each column, and each sub-grid contains all the digits from 1 to 9 without any repetition. A partially filled Sudoku grid is given as input, and the solver should determine a solution if one exists.
 
@@ -35,6 +35,11 @@ Sudoku is a popular logic-based puzzle game played on a 9x9 grid. The grid is di
 | 2 | 8 | 7 | 4 | 1 | 9 | 6 | 3 | 5 |
 | 3 | 4 | 5 | 2 | 8 | 6 | 1 | 7 | 9 |
 
+## Initialisation of the project
+
+
+
+## Accepted JSON format
 
 ## Expectations
 
@@ -54,22 +59,6 @@ Sudoku is a popular logic-based puzzle game played on a 9x9 grid. The grid is di
 
 1. Functional Properties: Whenever possible, leverage the functional programming principles such as immutability, pure functions, and referential transparency. Aim to write code that is easy to reason about, test, and maintain.
 
-## Additional Requirements
-
-1. Group Size: Form groups of up to 4 students. You are encouraged to collaborate and discuss ideas within your group but ensure that each member actively contributes to the project.
-
-1. Due Date: The project is expected to be completed within one week after the class. Submit your project by the specified due date and time. Late submissions may incur penalties unless prior arrangements have been made with the instructor.
-
-1. Language: Use English for code, comments and documentation.
-
-## Deliverables
-
-1. Scala 3 code implementing the Sudoku solver using ZIO, adhering to the given requirements and expectations.
-
-1. Git repository containing your code with appropriate commits and a README file providing instructions on how to run and test your Sudoku solver and the decisions made (librairies, data structure(s), algorithm and its performance, ...).
-
-1. Documentation explaining the purpose, functionality, and usage of your Sudoku solver, along with any external libraries used.
-
 ## Grading
 
 Your solution will be graded based on the following criteria:
@@ -87,60 +76,3 @@ Your solution will be graded based on the following criteria:
 1. Collaboration within the group and active participation of each member.
 
 1. Timely submission of the project by the specified due date.
-
-## Additional Information
-
-To get started with your Scala 3 project using sbt, follow these steps:
-
-1. Install Coursier or review your steup by following the instructions provided at https://docs.scala-lang.org/getting-started/index.html.
-
-1. Open a terminal or command prompt and navigate to the directory where you want to create your project.
-
-1. Run the following command to generate a new Scala 3 project using sbt: `sbt new scala/scala3.g8`
-
-1. Follow the prompts to provide a name and other details for your project.
-
-Once your project is generated, you will have a basic project structure with a `build.sbt` file. Replace the contents of the `build.sbt` file with the following skeleton, including the mentioned libraries (latest versions):
-
-```scala
-val zioVersion = "2.0.15"
-val scala3Version = "3.3.0"
-
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "sudoku-solver",
-    version := "1.0",
-
-    scalaVersion := scala3Version,
-
-    libraryDependencies ++= Seq(
-      "dev.zio" %% "zio" % zioVersion,
-      // Add other libraries like zio-nio and zip-json here if needed
-    ).map(_ % Compile),
-    libraryDependencies ++= Seq(
-      "org.scalameta" %% "munit" % "0.7.29"
-    ).map(_ % Test)
-  )
-```
-
-For the ZIO application template, replace the contents of the `src/main/scala/Main.scala` file with the following code:
-
-```scala
-package sudoku
-
-import zio._
-
-object Main extends ZIOAppDefault {
-
-  def run: ZIO[Any, Throwable, Unit] =
-    for {
-      _ <- Console.print("Enter the path to the JSON file containing the Sudoku problem:")
-      path <- Console.readLine
-      _ <-  Console.printLine(s"You entered: $path")
-      // Add your Sudoku solver logic here, utilizing ZIO and interacting with the ZIO Console
-    } yield ()
-}
-```
-
-This provides a basic ZIO application template that prompts the user for a JSON file path and prints the entered path. Modify this template to include your Sudoku solver logic using ZIO.
