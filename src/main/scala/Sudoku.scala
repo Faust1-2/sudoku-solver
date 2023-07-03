@@ -3,7 +3,7 @@ package sudoku
 import scala.collection.mutable
 import scala.util.boundary
 
-class Sudoku(grid: Array[Array[Int]]) {
+class Sudoku(grid: Grid) {
 
   override def toString(): String = {
     val myString = mutable.StringBuilder()
