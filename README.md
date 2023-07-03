@@ -1,10 +1,10 @@
-# Class Exam Instruction: Sudoku Solver in Scala
+# Sudoku Solver in Scala
 
-## Topic
+## Presentation
 
-Write a Sudoku solver in Scala 3 using [ZIO](https://zio.dev/overview/getting-started), a purely functional, type-safe, composable library for asynchronous, concurrent programming in Scala. You will find useful to use additional libraries from the ZIP ecosystem, such as [`zio-nio`](https://zio.dev/zio-nio/) and [`zio-json`](https://zio.dev/zio-json/).
+This application is a Sudoku solver in Scala 3 using [ZIO](https://zio.dev/overview/getting-started), a purely functional, type-safe, composable library for asynchronous, concurrent programming in Scala. 
 
-## Description
+## Description of the game
 
 Sudoku is a popular logic-based puzzle game played on a 9x9 grid. The grid is divided into 9 rows, 9 columns, and 9 3x3 sub-grids. The objective is to fill the grid with digits from 1 to 9 such that each row, each column, and each sub-grid contains all the digits from 1 to 9 without any repetition. A partially filled Sudoku grid is given as input, and the solver should determine a solution if one exists.
 
@@ -35,112 +35,90 @@ Sudoku is a popular logic-based puzzle game played on a 9x9 grid. The grid is di
 | 2 | 8 | 7 | 4 | 1 | 9 | 6 | 3 | 5 |
 | 3 | 4 | 5 | 2 | 8 | 6 | 1 | 7 | 9 |
 
+## Initialisation and running of the project
 
-## Expectations
+In order to run the project, you will need to run specific commands in the following order :
 
-1. Data Structure: Design an appropriate data structure to represent the Sudoku problem and solution. Ensure the data structure supports immutability and functional programming principles where possible. You have adopt an iterative approach with solving the problem first and then improving the data structure and/or the other application features.
+- This command will make you connect to the sbt build server. It will load all the dependencies stored in the `build.sbt` file.
+  ```
+  sbt
+  ```
 
-1. ZIO Console Interaction: The solver should interact with the ZIO Console by requesting the user to provide a JSON file path containing a Sudoku problem. Upon receiving the path, the solver should attempt to solve the Sudoku puzzle and display the solution, if it exists.
+- You can now run the project with :
+  ```
+  run
+  ```
 
-1. Error Handling: Implement proper error handling mechanisms using ZIO's error handling capabilities. Handle scenarios such as invalid file paths, malformed JSON files, unsolvable Sudoku puzzles, etc. Provide informative error messages to the user.
+- In any case, if you edit the build.sbt file, please enter into the sbt server and run :
+  ```
+  reload
+  ```
+  Or run directly :
+  ```
+  sbt reload
+  ```
 
-1. Git Repository: Create a Git repository to manage your Sudoku solver project. Commit your code regularly and maintain a well-structured project organization.
+## Accepted JSON format
 
-1. Documentation Quality: Provide clear and concise documentation explaining the purpose, functionality, and usage of your Sudoku solver. Include instructions on how to run the solver and any additional setup required. Document any external libraries used and their significance in the project.
+The sudoku grids are stored in JSON files, that are read by the application on run time. Those files need to follow the defined format that you can find here :
 
-1. Recursive Approach: Implement the Sudoku solver using a recursive approach. Utilize the functional programming concepts available in Scala to write clean and readable recursive code.
-
-1. Testing: Write appropriate tests to validate the correctness of your Sudoku solver implementation. Include test cases that cover various scenarios, such as empty grids, partially filled grids, invalid Sudoku puzzles, and solvable puzzles.
-
-1. Functional Properties: Whenever possible, leverage the functional programming principles such as immutability, pure functions, and referential transparency. Aim to write code that is easy to reason about, test, and maintain.
-
-## Additional Requirements
-
-1. Group Size: Form groups of up to 4 students. You are encouraged to collaborate and discuss ideas within your group but ensure that each member actively contributes to the project.
-
-1. Due Date: The project is expected to be completed within one week after the class. Submit your project by the specified due date and time. Late submissions may incur penalties unless prior arrangements have been made with the instructor.
-
-1. Language: Use English for code, comments and documentation.
-
-## Deliverables
-
-1. Scala 3 code implementing the Sudoku solver using ZIO, adhering to the given requirements and expectations.
-
-1. Git repository containing your code with appropriate commits and a README file providing instructions on how to run and test your Sudoku solver and the decisions made (librairies, data structure(s), algorithm and its performance, ...).
-
-1. Documentation explaining the purpose, functionality, and usage of your Sudoku solver, along with any external libraries used.
-
-## Grading
-
-Your solution will be graded based on the following criteria:
-
-1. Correctness and functionality of the Sudoku solver implementation.
-
-1. Effective usage of ZIO, including error handling and ZIO Console interaction.
-
-1. Quality of code organization, adherence to functional programming principles, and use of recursion.
-
-1. Testing completeness and effectiveness, covering various scenarios.
-
-1. Quality and clarity of documentation, including the README file.
-
-1. Collaboration within the group and active participation of each member.
-
-1. Timely submission of the project by the specified due date.
-
-## Additional Information
-
-To get started with your Scala 3 project using sbt, follow these steps:
-
-1. Install Coursier or review your steup by following the instructions provided at https://docs.scala-lang.org/getting-started/index.html.
-
-1. Open a terminal or command prompt and navigate to the directory where you want to create your project.
-
-1. Run the following command to generate a new Scala 3 project using sbt: `sbt new scala/scala3.g8`
-
-1. Follow the prompts to provide a name and other details for your project.
-
-Once your project is generated, you will have a basic project structure with a `build.sbt` file. Replace the contents of the `build.sbt` file with the following skeleton, including the mentioned libraries (latest versions):
-
-```scala
-val zioVersion = "2.0.15"
-val scala3Version = "3.3.0"
-
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "sudoku-solver",
-    version := "1.0",
-
-    scalaVersion := scala3Version,
-
-    libraryDependencies ++= Seq(
-      "dev.zio" %% "zio" % zioVersion,
-      // Add other libraries like zio-nio and zip-json here if needed
-    ).map(_ % Compile),
-    libraryDependencies ++= Seq(
-      "org.scalameta" %% "munit" % "0.7.29"
-    ).map(_ % Test)
-  )
-```
-
-For the ZIO application template, replace the contents of the `src/main/scala/Main.scala` file with the following code:
-
-```scala
-package sudoku
-
-import zio._
-
-object Main extends ZIOAppDefault {
-
-  def run: ZIO[Any, Throwable, Unit] =
-    for {
-      _ <- Console.print("Enter the path to the JSON file containing the Sudoku problem:")
-      path <- Console.readLine
-      _ <-  Console.printLine(s"You entered: $path")
-      // Add your Sudoku solver logic here, utilizing ZIO and interacting with the ZIO Console
-    } yield ()
+```json
+{
+    "grid": [
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+        [v, v, v, v, v, v, v, v, v],
+    ]
 }
 ```
 
-This provides a basic ZIO application template that prompts the user for a JSON file path and prints the entered path. Modify this template to include your Sudoku solver logic using ZIO.
+With each **`v`** representing a value that you can set in the range **0 to 9**. With **0 representing the absence of value** and the values from **1 to 9 being real values of our sudoku grid**.
+
+⚠️ If you do not follow this format, the program will not run.⚠️
+
+The program will ask you to enter the path of the JSON sudoku. We recommend you to create a folder to store all your JSON sudoku at the same place. 
+
+## Algorithm explanations
+
+### Before solving
+
+The program will make sure that the sudoku grid is valid. According to the [sudoku rules](https://www.sudokuonline.io/tips/sudoku-rules), one value can only appears once in a line, column and 3x3 sub-grid.
+
+Our application will check that this rule is respected before trying to solve it. In case you have a duplicate value, the application will give you the line, column, or sub-grid where the duplicate is. For more informations about lines, columns and sub-grid indexes, please refer to the ***More information*** section.
+
+### Solving algorithm
+
+Our program use a "back-tracking" algorithm to solve the sudoku. It is a recursive algorithm that simply tries every possibility for each case of the sudoku. For more information about how it works, we invite you to refer to the following link: [Sudoku BackTracking](https://en.wikipedia.org/wiki/Sudoku_solving_algorithms#Backtracking)
+
+
+## More information
+
+In case you are lost at which column, line or sub-grid is concerned by an error, please refer to this part.
+
+### Line and column indexes
+
+|   i   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|-------|---|---|---|---|---|---|---|---|---|
+| **0** | v | v | v | v | v | v | v | v | v |
+| **1** | v | v | v | v | v | v | v | v | v |
+| **2** | v | v | v | v | v | v | v | v | v |
+| **3** | v | v | v | v | v | v | v | v | v |
+| **4** | v | v | v | v | v | v | v | v | v |
+| **5** | v | v | v | v | v | v | v | v | v |
+| **6** | v | v | v | v | v | v | v | v | v |
+| **7** | v | v | v | v | v | v | v | v | v |
+| **8** | v | v | v | v | v | v | v | v | v |
+
+### Sub-grid indexes
+
+| <!--  --> | <!--  --> | <!--  --> |
+| :-------: | :-------: | :-------: |
+|     0     |     1     |     2     |
+|     3     |     4     |     5     |
+|     6     |     7     |     8     |
