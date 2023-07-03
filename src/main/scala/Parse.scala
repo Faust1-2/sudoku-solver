@@ -4,6 +4,7 @@ import java.io.FileNotFoundException
 import scala.io.Source
 import zio._
 import zio.json._
+import scala.util.boundary
 
 type Grid = Array[Array[Int]]
 
@@ -15,3 +16,5 @@ def parseFile(path: String): ZIO[Any, Throwable, Grid] = {
     case Right(value) => ZIO.from(value)
     case Left(value) => throw FileNotFoundException()
 }
+
+def validateFormat(grid: Grid): Boolean = ???
