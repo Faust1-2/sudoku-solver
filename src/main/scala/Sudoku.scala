@@ -19,6 +19,11 @@ class Sudoku(grid: Array[Array[Int]]) {
     return myString.toString()
   }
 
+  /**
+    * isValid is a function that checks if the sudoku grid can be solved.
+    * It checks if there is a duplicate value in any columns, lines, or boxes.
+    * @return true if valid, false if not
+    */
   def isValid(): Boolean = {
     def hasDuplicates(list: Array[Int]): Boolean = {
       val filteredList = list.filter(_ != 0)
@@ -61,12 +66,28 @@ class Sudoku(grid: Array[Array[Int]]) {
     checkRows() && checkColumns() && checkSquares()
   }
 
+  /**
+    * A function that retrieve the specified column from the sudoku grid.
+    * @param column The index of the column to retrieve. Min : 0 - Max : 8
+    * @return Array[Int] corresponding to the values of the column.
+    */
   def readColumn(column: Int): Array[Int] = {
     return grid.map((line) => line(column))
   }
 
+  /**
+    * A function that retrieve the specified line from the sudoku grid.
+    * @param line The index of the line to retrieve. Min : 0 - Max : 8
+    * @return Array[Int] corresponding to the values of the line.
+    */
   def readLine(line: Int): Array[Int] = grid(line)
 
+  /**
+    * A function that retrieve the specified box from the sudoku grid.
+    * @param x The index of the column you want to find the box from. Min : 0 - Max : 8
+    * @param y The index of the line you want to find the box from. Min : 0 - Max : 8
+    * @return Array[Int] corresponding to the values of the box.
+    */
   def readSquare(x: Int, y: Int): Array[Int] = {
     val boxLine = x / 3
     val boxColumn = y / 3
@@ -79,6 +100,13 @@ class Sudoku(grid: Array[Array[Int]]) {
     return box.toArray
   }
 
+  /**
+    * Function that checks if a value can be added to the grid at a specified position.
+    * @param x the column index of the value you want to add.
+    * @param y the line index of the value you want to add.
+    * @param value - the value to check.
+    * @return true if the value can be added, false if not.
+    */
   def isInputValid(x: Int, y: Int, value: Int): Boolean = {
     val isNotInLine = !readLine(y).contains(value)
     val isNotInColumn = !readColumn(x).contains(value)
@@ -87,6 +115,12 @@ class Sudoku(grid: Array[Array[Int]]) {
     return isNotInBox && isNotInColumn && isNotInLine
   }
 
+  /**
+    * The solving function of the sudoku. Uses a "back-tracking" algorithm to try all the possibilities recursively.
+    * @param x the current column index of the grid, initialized at 0.
+    * @param y the current line index of the grid, initialized at 0.
+    * @return true if the a value can be added to the case, false if not. 
+    */
   def solve(x: Int = 0, y: Int = 0): Boolean = {
     if (y == 9) {
       print(this)
