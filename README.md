@@ -1,4 +1,4 @@
-# Class Exam Instruction: Sudoku Solver in Scala
+# Sudoku Solver in Scala
 
 ## Presentation
 
