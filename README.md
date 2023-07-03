@@ -121,3 +121,11 @@ In case you are lost at which column, line or sub-grid is concerned by an error,
 |     0     |     1     |     2     |
 |     3     |     4     |     5     |
 |     6     |     7     |     8     |
+
+## Contributors
+
+Developped by :
+- [@Turdyo](https://github.com/Turdyo)
+- [@maxblt](https://github.com/maxblt)
+- [@Faust1-2](https://github.com/Faust1-2)
+- [@Tenkoh](https://github.com/BlanchardNicolas)
