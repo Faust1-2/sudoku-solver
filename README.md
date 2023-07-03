@@ -64,7 +64,7 @@ The sudoku grids are stored in JSON files, that are read by the application on r
 
 ```json
 {
-    [
+    "grid": [
         [v, v, v, v, v, v, v, v, v],
         [v, v, v, v, v, v, v, v, v],
         [v, v, v, v, v, v, v, v, v],
