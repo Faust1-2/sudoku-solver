@@ -11,7 +11,8 @@ class Sudoku(grid: Array[Array[Int]]) {
       for (value <- 0 to 8) {
         if (line == 0) myString.addAll(" ___")
         else if (line == 10) myString.addAll(" ‾‾‾")
-        else myString.addAll("| %d ".format(grid(line - 1)(value)))
+        else if (value != 0) myString.addAll("| %d ".format(grid(line - 1)(value)))
+        else myString.addAll("|   ")
       }
       if (line != 0 && line != 10) myString.addAll("|\n")
       else myString.addAll("\n")
