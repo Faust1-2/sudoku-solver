@@ -9,24 +9,12 @@ object Main extends ZIOAppDefault {
       _ <- Console.print("Enter the path to the JSON file containing the Sudoku problem:")
       path <- Console.readLine
       grid <- parseFile(path)
-        .catchAll { error =>
+        .catchAll ({ error =>
           for {
-            _ <- ZIO.logError("file error")
-            defaultGrid <- ZIO.from(
-              Array(
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9),
-                Array(1, 2, 3, 4, 5, 6, 7, 8, 9)
-              )
-            )
-          } yield defaultGrid
-        }
+            _ <- ZIO.logErrorCause("file error", Cause.fail(error))
+          } yield ()
+          ZIO.die(error)
+        })
       sudoku <- ZIO.from(Sudoku(grid = grid))
       _ <- Console.printLine(s"Successfully parsed Sudoku grid:\n$sudoku")
       _ <- ZIO.from(sudoku.solve())
